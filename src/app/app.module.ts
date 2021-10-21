@@ -13,7 +13,11 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { FilesModule } from './files/files.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+// Interceptors
+import { TokenInterceptorService } from './_services/token-interceptor.service';
+import { UploadModule } from './upload/upload.module';
 
 @NgModule({
   declarations: [
@@ -27,11 +31,17 @@ import { HttpClientModule } from '@angular/common/http';
     UsersModule,
     AuthModule,
     FilesModule,
-    AppRoutingModule,
+    UploadModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

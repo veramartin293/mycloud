@@ -1,0 +1,10 @@
+<a class="file-card">
+  <div class="file-card__image"
+  [ngStyle]="{'background-image': isImage ? 'url(' + file.path + ')' : ''}"
+  [ngClass]="!isImage ? 'file-card__image--' + file.file_type : ''"
+  ></div>
+  <div class="file-card__info">
+    <p><strong>Uploaded by:</strong> {{ file.propetary }}</p>
+    <p><strong>Uploaded at:</strong> {{ file.created_at }}</p>
+  </div>
+</a>

@@ -1,0 +1,74 @@
+@import "../../../scss/variables.scss";
+
+.file-info {
+  display: flex;
+  width: 80%;
+  margin: 0 auto 2rem auto;
+  align-items: center;
+
+  p {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+
+  button {
+    justify-self: flex-end;
+    margin: 0 0;
+    margin-left: auto;
+  }
+}
+
+.dropzone {
+  width: 80%;
+  height: 70vh;
+  margin: 0 auto 3rem auto;
+  border: 1rem dotted $primary-color-dark;
+  position: relative;
+  padding: 2rem;
+  transition: all .3s ease;
+  cursor: pointer;
+
+  &__file {
+    background-color: green;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 2;
+    position: absolute;
+    cursor: pointer;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__info {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    // transform: translateX(-50%);
+    transform: translate(-50%, -50%);
+    // z-index: 1;
+
+    & h2 {
+      line-height: 1.4rem;
+    }
+  }
+}
+
+.dropzone-message {
+  &__file {
+    display: flex;
+    align-items: center;
+  }
+
+  &__close {
+    display: block;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 1rem;
+  }
+
+}

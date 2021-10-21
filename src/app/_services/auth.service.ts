@@ -59,4 +59,13 @@ export class AuthService {
     }
     return validToken;
   }
+
+  public getToken() {
+    const token = window.localStorage.getItem('token') || '';
+    if (this.isTokenValidJwt(token)) {
+      return token;
+    } else {
+      return '';
+    }
+  }
 }

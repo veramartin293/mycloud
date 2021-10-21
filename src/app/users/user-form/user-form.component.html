@@ -1,0 +1,71 @@
+<form class="user-form form"  [formGroup]="userForm" (ngSubmit)="saveUser()">
+  <legend>{{ formLegend }}</legend>
+
+  <div class="form__field">
+    <input type="text" placeholder="Name" formControlName="name">
+
+    <div
+    class="form-messages"
+    *ngIf="userForm.controls.name.touched &&
+      userForm.controls.name.invalid">
+
+      <div class="form-messages__error" *ngIf="userForm.controls.name.errors?.required">
+        Name is required.
+      </div>
+      <div class="form-messages__error" *ngIf="userForm.controls.name.errors?.email">
+        Name must be a valid email.
+      </div>
+    </div>
+  </div>
+
+  <div class="form__field">
+    <input type="email" placeholder="Email" formControlName="email">
+
+    <div
+    class="form-messages"
+    *ngIf="userForm.controls.email.touched &&
+      userForm.controls.email.invalid">
+
+      <div class="form-messages__error" *ngIf="userForm.controls.email.errors?.required">
+        Email is required.
+      </div>
+      <div class="form-messages__error" *ngIf="userForm.controls.email.errors?.email">
+        Email must be a valid email.
+      </div>
+    </div>
+  </div>
+
+  <div class="form__field">
+    <input type="password" placeholder="Password" formControlName="password">
+
+
+    <div class="form-messages" *ngIf="formMode === 'update'">
+      <div class="form-messages__general">
+        Leave empty if you don't want to update user's password.
+      </div>
+    </div>
+
+    <div
+    class="form-messages"
+    *ngIf="userForm.controls.password.touched &&
+      userForm.controls.password.invalid">
+
+      <div class="form-messages__error" *ngIf="userForm.controls.password.errors?.required">
+        Password is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="form__field">
+    <select name="user-role" id="user-role" formControlName="role">
+      <option value="admin">Admin</option>
+      <option value="user">User</option>
+    </select>
+  </div>
+
+  <button
+  class="button"
+  [disabled]="!userForm.valid"
+  [class.disabled]="!userForm.valid"
+  >Save</button>
+</form>

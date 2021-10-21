@@ -1,0 +1,42 @@
+@import "../../../scss/variables.scss";
+@import '../../../scss/mixins.scss';
+
+.file-card {
+  background: $light-bg;
+  column-gap: 2rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  line-height: .8rem;
+  color: $primary-color-dark;
+  cursor: pointer;
+
+  &__image {
+    height: 20rem;
+    // background-image:url('https://i.stack.imgur.com/wPh0S.jpg');
+    // background-image:url('../../../assets/files-icon.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &--docx {
+      background-color: #004578;
+      background-image:url('../../../assets/word-icon.svg');
+      background-size: 50% auto
+    }
+    &--xlsx {
+      background-color: #008000;
+      background-image:url('../../../assets/excel-icon.svg');
+      background-size: 50% auto
+    }
+    &--csv {
+      background-color: #008000;
+      background-image:url('../../../assets/csv-icon.svg');
+      background-size: 50% auto
+    }
+  }
+
+  &__info {
+    padding: 1rem;
+    text-transform: capitalize;
+  }
+}

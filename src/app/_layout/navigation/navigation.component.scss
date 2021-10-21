@@ -1,3 +1,65 @@
+@import "../../../scss/variables.scss";
+@import '../../../scss/mixins.scss';
+
 .navigation {
-  background-color: paleturquoise;
+  width: 18rem;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  padding: 2rem 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: $primary-color;
+  color: white;
+  border-top-right-radius: 4rem;
+  transition: all .3s ease;
+  font-size: 1.6rem;
+  font-weight: 500;
+
+  @include responsive(phone) {
+    align-items: center;
+    width: 6rem;
+    font-size: 1.2rem;
+    border-top-right-radius: 3rem;
+  }
+}
+
+.link-elem {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: .8rem;
+  border-start-end-radius: 2.2rem;
+  border-end-end-radius: 2.2rem;
+  transition: all .3s ease;
+
+  @include responsive(phone) {
+    flex-direction: column;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $primary-color-light;
+
+    @include responsive(phone) {
+      background-color: inherit;
+    }
+  }
+
+  &__image {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  &__text {
+    text-align: center;
+    margin-left: 1rem;
+
+    @include responsive(phone) {
+      display: none;
+    }
+  }
 }

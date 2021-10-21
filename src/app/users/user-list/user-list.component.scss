@@ -1,0 +1,56 @@
+@import "../../../scss/variables.scss";
+@import '../../../scss/mixins.scss';
+
+.user-list {
+  width: 90%;
+  margin: 0 auto;
+
+  &__info {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: flex-end;
+
+    & .button {
+      justify-self: flex-end;
+    }
+  }
+  &__table {
+    width: 100%;
+    padding: 2rem 4rem;
+    border-collapse: collapse;
+
+    & th {
+      font-size: 1.6rem;
+      padding-bottom: 1rem;
+    }
+
+    & td {
+      padding: 2rem 0;
+    }
+
+    & tr {
+      text-align: center;
+      font-size: 1.6rem;
+      border-bottom: 2px solid $light-bg;
+    }
+
+  }
+  &__icon { // img tag
+    display: inline-block;
+    height: 3rem;
+    width: auto;
+    padding: .5rem;
+    margin-left: 1rem;
+    border-radius: .5rem;
+    background-color: $light-bg;
+    cursor: pointer;
+
+    &--green {
+      background-color: $success-color;
+    }
+
+    &--red {
+      background-color: $error-color;
+    }
+  }
+}

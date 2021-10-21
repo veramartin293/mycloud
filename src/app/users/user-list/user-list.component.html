@@ -1,1 +1,37 @@
-<p>user-list works!</p>
+
+<div class="user-list">
+
+  <div class="user-list__info">
+    <button class="button" (click)="openFormDialog({})">Add New</button>
+  </div>
+
+  <table class="user-list__table">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Created At</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+      <td>{{ formatDate(user.created_at) }}</td>
+      <td class="icon-container">
+          <img
+          class="user-list__icon user-list__icon--green"
+          src="../../../assets/edit-icon.svg"
+          alt="edit icon"
+          (click)="openFormDialog(user)"
+          >
+
+          <img
+          class="user-list__icon user-list__icon--red"
+          src="../../../assets/delete-icon.svg"
+          alt="delete icon">
+      </td>
+    </tr>
+  </table>
+
+</div>

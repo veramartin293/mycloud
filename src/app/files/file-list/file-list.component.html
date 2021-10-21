@@ -1,1 +1,7 @@
-<p>file-list works!</p>
+<div class="file-list">
+    <app-file-card
+    *ngFor="let file of files"
+    [file]=file
+    (click)='getFile(file)'
+    ></app-file-card>
+</div>

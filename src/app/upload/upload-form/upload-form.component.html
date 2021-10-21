@@ -1,0 +1,45 @@
+<div class="file-info">
+  <div class="dropzone-message">
+
+    <p class="error-color" *ngIf="error"><strong>{{error}}</strong></p>
+
+    <div class="dropzone-message__file" *ngIf="file">
+      <div class="file-name">
+        <p><strong>File to upload:</strong> {{file.name}}</p>
+      </div>
+
+      <div class="file-close-icon">
+        <span class="dropzone-message__close error-color" (click)="resetFile()">&times;</span>
+      </div>
+    </div>
+  </div>
+
+  <button
+  class="button button--dropzone"
+  (click)="uploadFile()"
+  [class.disabled]=!file
+  [disabled]=!file>Upload File</button>
+</div>
+
+
+<div
+class="dropzone"
+(drop)="onDropFile($event)"
+[class.disabled]=file>
+
+  <input class="dropzone__file"
+  type="file"
+  #fileDropRef
+  id="fileDropRef"
+  multiple
+  (change)="onFileChange($event)"
+  [disabled]=file
+  [class.disabled]=file
+  >
+
+  <div class="dropzone__info">
+    <h2>Drag and drop a file</h2>
+    <h2>Or</h2>
+    <h2 for="fileDropRef">Click inside to browse in device</h2>
+  </div>
+</div>
