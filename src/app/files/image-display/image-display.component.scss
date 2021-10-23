@@ -1,4 +1,14 @@
+@import '../../../scss/mixins.scss';
+
 .img-display {
-  width: 60rem;
-  max-height: 80vh;
+
+  & img {
+    height: auto;
+    max-height: 80vh;
+    overflow: hidden;
+  }
+
+  @include responsive(tablet-l) {
+    // max-width: 100%;
+  }
 }

@@ -1,7 +1,25 @@
 @import "../../../scss/variables.scss";
+@import "../../../scss/mixins.scss";
 
 .login-form {
   width: 35rem;
-  margin: 0 auto;
+  border-radius: 2rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 35rem;
+
+  -webkit-box-shadow: 0px 0px 5px 0px rgba($primary-color-dark,0.59);
+  box-shadow: 0px 0px 5px 0px rgba($primary-color-dark,0.59);
+  transition: all .3s ease;
+
+  @include responsive(phone) {
+    width: 100%;
+  }
+
+  & .button {
+    margin: 0 auto;
+  }
 }
 

@@ -1,6 +1,5 @@
 <div class="file-info">
   <div class="dropzone-message">
-
     <p class="error-color" *ngIf="error"><strong>{{error}}</strong></p>
 
     <div class="dropzone-message__file" *ngIf="file">
@@ -17,10 +16,13 @@
   <button
   class="button button--dropzone"
   (click)="uploadFile()"
-  [class.disabled]=!file
+  [class.disabled]="!file || progress"
   [disabled]=!file>Upload File</button>
 </div>
 
+<div class="progress-bar-container">
+  <mat-progress-bar value="{{ progress }}"></mat-progress-bar>
+</div>
 
 <div
 class="dropzone"
@@ -35,6 +37,7 @@ class="dropzone"
   (change)="onFileChange($event)"
   [disabled]=file
   [class.disabled]=file
+  id="input-file-id"
   >
 
   <div class="dropzone__info">
@@ -43,3 +46,12 @@ class="dropzone"
     <h2 for="fileDropRef">Click inside to browse in device</h2>
   </div>
 </div>
+
+<div
+class="notification"
+[class.notification--success]=!notification.error
+[class.notification--error]=notification.error
+*ngIf="notification.display">
+  {{ notification.message }}
+</div>
+

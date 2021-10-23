@@ -11,21 +11,25 @@ import { ImageDisplayComponent } from '../image-display/image-display.component'
 export class FileListComponent implements OnInit {
 
   public files:any[];
+  private pageNumber:number;
 
   constructor(private filesService: FilesService, private dialog: MatDialog) {
     this.files = [];
+    this.pageNumber = 1;
   }
 
   ngOnInit(): void {
     this.getFiles();
   }
 
+  public onScrollDown(event: any) {
+    this.getFiles(++this.pageNumber);
+  }
+
   public getFile(file:any) {
     const imageTypes = ['jpg', 'jpeg', 'png'];
     const isFileAnImage = imageTypes.includes(file.file_type);
     if (isFileAnImage) {
-      console.log('Path inside list');
-      console.log(file.path);
       this.openImageDisplayDialog(file);
     }
   }
@@ -41,11 +45,17 @@ export class FileListComponent implements OnInit {
     this.dialog.open(ImageDisplayComponent, dialogConfig);
   }
 
-  public getFiles() {
-    this.filesService.getAll()
+  public getFiles(page:number = 1) {
+    this.filesService.getAll(page)
     .subscribe(
       resp => {
-        this.files = resp;
+        if (page === 1) {
+          this.files = resp;
+        } else {
+          for (let file of resp) {
+            this.files.push(file);
+          }
+        }
       },
       error => {
         console.log(error);

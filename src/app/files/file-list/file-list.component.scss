@@ -1,6 +1,19 @@
+@import '../../../scss/mixins.scss';
+
 .file-list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   padding: 2rem;
+  transition: all .3s ease;
+
+  @include responsive(tablet-l) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include responsive(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include responsive(phone-s) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

@@ -6,6 +6,7 @@ import { FileListComponent } from './file-list/file-list.component';
 import { FileCardComponent } from './file-card/file-card.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ImageDisplayComponent } from './image-display/image-display.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ImageDisplayComponent } from './image-display/image-display.component';
   imports: [
     CommonModule,
     MatDialogModule,
+    InfiniteScrollModule,
     FilesRoutingModule
   ]
 })

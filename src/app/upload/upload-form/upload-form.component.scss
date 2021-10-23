@@ -1,32 +1,76 @@
 @import "../../../scss/variables.scss";
+@import "../../../scss/mixins.scss";
 
 .file-info {
   display: flex;
   width: 80%;
-  margin: 0 auto 2rem auto;
+  margin: 2rem auto 2rem auto;
   align-items: center;
+
+  @include responsive(phone) {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 
   p {
     margin: 0;
     font-size: 1.8rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    // width: 70rem; // some width
+    max-width: 70rem;
+
+    @include responsive(tablet-l) {
+      max-width: 40rem; // some width
+    }
+
+    @include responsive(tablet) {
+      max-width: 30rem; // some width
+    }
+
+    @include responsive(phone) {
+      max-width: 30rem; // some width
+      font-size: 1.4rem;
+    }
+
+    @include responsive(phone-s) {
+      max-width: 20rem; // some width
+      font-size: 1.4rem;
+    }
   }
 
   button {
     justify-self: flex-end;
     margin: 0 0;
     margin-left: auto;
+
+    @include responsive(phone) {
+      font-size: 1.2rem;
+      margin-left: 0;
+    }
   }
+}
+
+.progress-bar-container {
+  width: 80%;
+  margin: 0 auto;
 }
 
 .dropzone {
   width: 80%;
   height: 70vh;
-  margin: 0 auto 3rem auto;
+  margin: 2rem auto 0 auto;
   border: 1rem dotted $primary-color-dark;
   position: relative;
   padding: 2rem;
   transition: all .3s ease;
   cursor: pointer;
+
+  @include responsive(phone) {
+    height: 65vh; // some width
+  }
 
   &__file {
     background-color: green;
@@ -35,6 +79,8 @@
     opacity: 0;
     z-index: 2;
     position: absolute;
+    top: 0;
+    left: 0;
     cursor: pointer;
 
     &:hover {
@@ -52,7 +98,7 @@
     // z-index: 1;
 
     & h2 {
-      line-height: 1.4rem;
+      line-height: 2.2rem;
     }
   }
 }
@@ -61,6 +107,10 @@
   &__file {
     display: flex;
     align-items: center;
+
+    @include responsive(phone) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__close {
@@ -71,4 +121,8 @@
     margin-left: 1rem;
   }
 
+}
+
+.file-close-icon {
+  margin-right: 2rem;
 }

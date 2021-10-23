@@ -38,15 +38,13 @@
 
   @include responsive(phone) {
     flex-direction: column;
+    width: auto;
+    border-radius: .4rem;
   }
 
   &:hover {
     cursor: pointer;
     background-color: $primary-color-light;
-
-    @include responsive(phone) {
-      background-color: inherit;
-    }
   }
 
   &__image {

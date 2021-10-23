@@ -1,24 +1,24 @@
 <nav class="navigation">
-  <a routerLink="/files" class="link-elem">
+  <a routerLink="/files" routerLinkActive="active-link" class="link-elem">
     <div class="link-elem__image">
       <img src="../../../assets/files-icon.svg" alt="files icon">
     </div>
     <div class="link-elem__text">Files</div>
   </a>
-  <a routerLink="/users" class="link-elem">
+  <a routerLink="/users" routerLinkActive="active-link" class="link-elem" *ngIf="isUserAdmin">
     <div class="link-elem__image">
       <img src="../../../assets/users-icon.svg" alt="users icon">
     </div>
     <div class="link-elem__text">Users</div>
   </a>
-  <a routerLink="/upload" class="link-elem">
+  <a routerLink="/upload" routerLinkActive="active-link" class="link-elem">
     <div class="link-elem__image">
       <img src="../../../assets/upload-icon.svg" alt="upload icon">
     </div>
     <div class="link-elem__text">Upload</div>
   </a>
 
-  <div class="link-elem">
+  <div class="link-elem" routerLinkActive="active-link" (click)="logout()">
     <div class="link-elem__image">
       <img src="../../../assets/log-out-icon.svg" alt="log out icon">
     </div>

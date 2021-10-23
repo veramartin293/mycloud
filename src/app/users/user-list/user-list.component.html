@@ -1,37 +1,49 @@
+<div class="scrollable"
+infiniteScroll
+[scrollWindow]=false
+[infiniteScrollThrottle]=100
+(scrolled)="onScrollDown($event)">
 
-<div class="user-list">
+  <div class="user-list">
+    <div class="user-list__info">
+      <h1>Users</h1>
+      <button class="button" (click)="openFormDialog({})">Add New</button>
+    </div>
 
-  <div class="user-list__info">
-    <button class="button" (click)="openFormDialog({})">Add New</button>
+    <table class="user-list__table">
+      <tr>
+        <th class="name">Name</th>
+        <th class="email">Email</th>
+        <th class="role">Role</th>
+        <th class="date">Created At</th>
+        <th class="actions">Actions</th>
+      </tr>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td class="email">{{ user.email }}</td>
+        <td class="role">{{ user.role }}</td>
+        <td class="date">{{ formatDate(user.created_at) }}</td>
+        <td class="actions icon-container">
+            <img
+            class="user-list__icon user-list__icon--green"
+            src="../../../assets/edit-icon.svg"
+            alt="edit icon"
+            (click)="openFormDialog(user)"
+            >
+
+            <img
+            class="user-list__icon user-list__icon--red"
+            src="../../../assets/delete-icon.svg"
+            alt="delete icon"
+            (click)="deleteUser(user)">
+        </td>
+      </tr>
+    </table>
   </div>
+</div>
 
-  <table class="user-list__table">
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Created At</th>
-      <th>Actions</th>
-    </tr>
-    <tr *ngFor="let user of users">
-      <td>{{ user.name }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.role }}</td>
-      <td>{{ formatDate(user.created_at) }}</td>
-      <td class="icon-container">
-          <img
-          class="user-list__icon user-list__icon--green"
-          src="../../../assets/edit-icon.svg"
-          alt="edit icon"
-          (click)="openFormDialog(user)"
-          >
-
-          <img
-          class="user-list__icon user-list__icon--red"
-          src="../../../assets/delete-icon.svg"
-          alt="delete icon">
-      </td>
-    </tr>
-  </table>
-
+<div
+class="notification notification--success"
+*ngIf="notification.display">
+  {{ notification.message }}
 </div>

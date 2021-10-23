@@ -6,6 +6,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserElemComponent } from './user-elem/user-elem.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    InfiniteScrollModule,
     UsersRoutingModule
   ]
 })

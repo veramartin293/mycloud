@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
 import { Router } from  '@angular/router';
 
@@ -11,15 +11,19 @@ import { Router } from  '@angular/router';
 export class LoginFormComponent implements OnInit {
 
   public loginForm:FormGroup;
+  public generalError: string;
 
   constructor(
     private authServie: AuthService,
-    private router: Router
+    private router: Router,
+    public formBuilder:FormBuilder
   ) {
-    this.loginForm = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl('')
+
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
+    this.generalError = '';
   }
 
   ngOnInit(): void {
@@ -39,8 +43,12 @@ export class LoginFormComponent implements OnInit {
         this.router.navigate(['/']);
       },
       errorResp => {
-        const error = errorResp.error.error || errorResp.error.errors;
-        console.log(error);
+        // const error = errorResp.error.error || errorResp.error.errors;
+        if (errorResp.status == 422) {
+          this.generalError = errorResp.error.error;
+        } else {
+          console.log(errorResp);
+        }
       }
     )
   }

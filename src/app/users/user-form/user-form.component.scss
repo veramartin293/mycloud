@@ -1,9 +1,32 @@
+@import '../../../scss/mixins.scss';
+
 .user-form {
   width: 35rem;
   box-shadow: none;
   padding: 0;
 
+  @include responsive(phone) {
+    width: 30rem;
+  }
+
+  @include responsive(phone-s) {
+    width: 100%;
+  }
+
   & button {
     margin: 0 auto;
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: center;
+
+    & button {
+      margin: 0;
+    }
+
+    & button:first-child {
+      margin-right: 1rem;
+    }
   }
 }

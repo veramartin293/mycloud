@@ -16,7 +16,7 @@ export class UserFormComponent implements OnInit {
   public formMode:string;
   public onAdd: EventEmitter<any>;
   public formLegend: string;
-  // onAdd = new EventEmitter();
+  public generalError: string;
 
   constructor(
     private dialogRef: MatDialogRef<UserFormComponent>,
@@ -37,6 +37,8 @@ export class UserFormComponent implements OnInit {
         role: [this.user.role || 'admin', [Validators.required]],
       });
 
+      this.generalError = '';
+
       this.onAdd = new EventEmitter();
     }
 
@@ -44,7 +46,6 @@ export class UserFormComponent implements OnInit {
   }
 
   public saveUser() {
-    console.log(this.userForm.valid);
 
     // Get the data from the form
     const tempUser:any = {
@@ -71,10 +72,15 @@ export class UserFormComponent implements OnInit {
     .subscribe(
       resp => {
         this.onAdd.emit(resp);
-        this.dialogRef.close();
+        this.dialogRef.close({message: 'User created successfully'});
       },
       err => {
-        console.log(err);
+        if (err.status === 422) {
+          if (err.error.error) {
+            this.generalError = err.error.error;
+            return;
+          }
+        }
         this.dialogRef.close();
       }
     )
@@ -84,12 +90,16 @@ export class UserFormComponent implements OnInit {
     this.usersService.updateOne(tempUser)
     .subscribe(
       resp => {
-        console.log(resp);
         this.setNewUserValues(tempUser);
-        this.dialogRef.close();
+        this.dialogRef.close({message: 'User updated successfully'});
       },
       err => {
-        console.log(err);
+        if (err.status === 422) {
+          if (err.error.error) {
+            this.generalError = err.error.error;
+            return;
+          }
+        }
         this.dialogRef.close();
       }
     )
@@ -99,6 +109,10 @@ export class UserFormComponent implements OnInit {
     this.user.name = tempUser.name;
     this.user.email = tempUser.email;
     this.user.role = tempUser.role_id === 1 ? 'admin' : 'user';
+  }
+
+  public closeModal() {
+    this.dialogRef.close();
   }
 
 }

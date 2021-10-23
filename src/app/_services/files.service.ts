@@ -15,8 +15,8 @@ export class FilesService {
     this.url = environment.url;
   }
 
-  public getAll(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}/files`);
+  public getAll(page:number = 1): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/files?page=${page}`);
   }
 
   public upload(file: any): Observable<any> {

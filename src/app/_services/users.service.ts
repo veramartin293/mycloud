@@ -14,8 +14,8 @@ export class UsersService {
     this.url = environment.url;
   }
 
-  public getAll(): Observable<any> {
-    return this.http.get<any>(`${this.url}/users`);
+  public getAll(page:number = 1): Observable<any> {
+    return this.http.get<any>(`${this.url}/users?page=${page}`);
   }
 
   public updateOne(user:any): Observable<any> {
@@ -24,6 +24,10 @@ export class UsersService {
 
   public addOne(user: any): Observable<any> {
     return this.http.post<any>(`${this.url}/users`, user);
+  }
+
+  public deleteOne(userId: any): Observable<any> {
+    return this.http.delete<any>(`${this.url}/users/${userId}`);
   }
 }
 

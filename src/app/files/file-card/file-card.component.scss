@@ -2,6 +2,8 @@
 @import '../../../scss/mixins.scss';
 
 .file-card {
+  // height: 28rem;
+  height: 36vh;
   background: $light-bg;
   column-gap: 2rem;
   border-radius: 2rem;
@@ -9,34 +11,53 @@
   line-height: .8rem;
   color: $primary-color-dark;
   cursor: pointer;
+  position: relative;
+  transition: all .3s ease;
 
   &__image {
-    height: 20rem;
-    // background-image:url('https://i.stack.imgur.com/wPh0S.jpg');
-    // background-image:url('../../../assets/files-icon.svg');
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    transition: all .3s ease;
+
+    &:hover {
+      transform: scale(1.2);
+    }
 
     &--docx {
       background-color: #004578;
       background-image:url('../../../assets/word-icon.svg');
-      background-size: 50% auto
+      background-size: auto 70%
     }
     &--xlsx {
       background-color: #008000;
       background-image:url('../../../assets/excel-icon.svg');
-      background-size: 50% auto
+      background-size: auto 70%
     }
     &--csv {
       background-color: #008000;
       background-image:url('../../../assets/csv-icon.svg');
-      background-size: 50% auto
+      background-size: auto 70%
     }
   }
 
-  &__info {
-    padding: 1rem;
-    text-transform: capitalize;
+  &__text {
+    position: absolute;
+    padding: .5rem 2rem;
+    background-color: rgba($light-bg, .80);
+    line-height: 1.4rem;
+
+    &--author {
+      bottom: 0;
+      left: 0;
+      border-top-right-radius: 1rem;
+    }
+
+    &--date {
+      top: 0;
+      right: 0;
+      border-bottom-left-radius: 1rem;
+    }
   }
 }

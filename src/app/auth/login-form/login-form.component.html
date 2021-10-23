@@ -2,10 +2,46 @@
   <legend>Welcome! Please Log-In</legend>
 
   <div class="form__field">
-    <input type="email" placeholder="E-mail" formControlName="email">
+    <input type="email" placeholder="Email" formControlName="email">
+
+    <div
+    class="form-messages"
+    *ngIf="loginForm.controls.email.touched &&
+      loginForm.controls.email.invalid">
+
+      <div class="form-messages__error" *ngIf="loginForm.controls.email.errors?.required">
+        Email is required.
+      </div>
+      <div class="form-messages__error" *ngIf="loginForm.controls.email.errors?.email">
+        Email must be a valid email.
+      </div>
+    </div>
   </div>
+
   <div class="form__field">
     <input type="password" placeholder="Password" formControlName="password">
+
+    <div
+    class="form-messages"
+    *ngIf="loginForm.controls.password.touched &&
+      loginForm.controls.password.invalid">
+
+      <div class="form-messages__error" *ngIf="loginForm.controls.password.errors?.required">
+        Password is required.
+      </div>
+    </div>
   </div>
-  <button class="button" type="submit">Log in</button>
+
+
+  <div class="form-bottom-container">
+    <div class="form-messages" *ngIf="generalError">
+      <div class="form-messages__error">{{ generalError }}</div>
+    </div>
+
+    <button
+    class="button"
+    [disabled]="!loginForm.valid"
+    [class.disabled]="!loginForm.valid"
+    >Login</button>
+  </div>
 </form>

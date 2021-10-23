@@ -12,12 +12,22 @@ export class UploadFormComponent implements OnInit {
   public error: string;
   public fileValidated: boolean;
   public file: any;
+  public progress:number;
+  public cancelUpload:boolean;
+  public notification:any;
 
   constructor(private filesService:FilesService) {
     this.uploadedFile = null;
     this.error = '';
     this.file = null;
     this.fileValidated = false;
+    this.progress = 0;
+    this.cancelUpload = false;
+    this.notification = {
+      display: false,
+      message: '',
+      error: false,
+    }
   }
 
   ngOnInit(): void {
@@ -37,18 +47,55 @@ export class UploadFormComponent implements OnInit {
   public onFileChange(event: any) {
     const files = event.target.files;
     this.validateFiles(files);
+    event.target.value = null;
   }
 
   public uploadFile(): void {
-    this.filesService.upload(this.file)
+    this.progress = 0;
+    this.cancelUpload = false;
+
+    const sub = this.filesService.upload(this.file)
     .subscribe(
       resp => {
-        console.log(resp);
-        this.resetFile();
+        if (resp.type === 1) {
+          this.progress = resp.loaded * 100 / resp.total;
+          if (this.cancelUpload) {
+            sub.unsubscribe();
+
+            // Display notification
+            this.notification.message = 'File upload cancelled';
+            this.notification.display = true;
+            this.notification.error = true;
+            setTimeout(() => {
+              this.notification.display = false;
+              this.notification.error = false;
+            }, 3000);
+            this.resetFile();
+            return;
+          }
+        } else if (this.progress >= 99) {
+          // Display notification
+          this.notification.message = 'File uploaded successfully';
+          this.notification.display = true;
+          setTimeout(() => {
+            this.notification.display = false;
+          }, 3000);
+
+          this.resetFile();
+          return;
+        }
       },
       err => {
-        console.log(err);
+        // Display notification
+        this.notification.message = err.error.error || err.message;
+        this.notification.display = true;
+        this.notification.error = true;
+        setTimeout(() => {
+          this.notification.display = false;
+          this.notification.error = false;
+        }, 3000);
         this.resetFile();
+        return;
       }
     )
   }
@@ -68,6 +115,7 @@ export class UploadFormComponent implements OnInit {
       this.error = 'You only can upload 1 file.'
       return;
     } else if (files.length === 1) {
+      console.log(files[0].type);
       if (!allowedTypes.includes(files[0].type)) {
         this.error = 'Please select a valid file type (jpg, jpeg, png, docx, xlsx, csv).'
         this.resetFile();
@@ -78,11 +126,11 @@ export class UploadFormComponent implements OnInit {
     }
 
     this.file = files[0];
-    console.log(this.file);
   }
 
   public resetFile(): void {
     this.file = null;
+    this.cancelUpload = true;
+    this.progress = 0;
   }
-
 }

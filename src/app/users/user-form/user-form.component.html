@@ -63,9 +63,22 @@
     </select>
   </div>
 
-  <button
-  class="button"
-  [disabled]="!userForm.valid"
-  [class.disabled]="!userForm.valid"
-  >Save</button>
+  <div class="form-messages" *ngIf="generalError">
+    <div class="form-messages__error">{{ generalError }}</div>
+  </div>
+
+  <div class="user-form__bottom">
+    <button
+    class="button"
+    [disabled]="!userForm.valid"
+    [class.disabled]="!userForm.valid"
+    type="submit"
+    >Save</button>
+
+    <button
+    class="button button--cancel"
+    (click)="closeModal()"
+    type="button"
+    >Cancel</button>
+  </div>
 </form>
